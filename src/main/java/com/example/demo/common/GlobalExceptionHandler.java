@@ -1,6 +1,6 @@
 package com.example.demo.common;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.context.MessageSource;
@@ -11,9 +11,9 @@ import com.example.demo.exception.UnauthorizedException;
 import com.example.demo.exception.ForbiddenException;
 
 @RestControllerAdvice
+@RequiredArgsConstructor
 public class GlobalExceptionHandler {
-    @Autowired
-    private MessageSource messageSource;
+    private final MessageSource messageSource;
 
     /*
      * 捕获参数验证异常

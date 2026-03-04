@@ -2,7 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dto.UserDTO;
 import com.example.demo.vo.UserVO;
-
+import org.springframework.data.domain.Page;
 import java.util.List;
 
 public interface UserService {
