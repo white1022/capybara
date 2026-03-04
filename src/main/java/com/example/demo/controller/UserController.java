@@ -5,8 +5,8 @@ import com.example.demo.dto.UserDTO;
 import com.example.demo.service.UserService;
 import com.example.demo.vo.UserVO;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -35,18 +35,19 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Integer id) {
-        Result.success(userService.delete(id));
+    public Result<Void> delete(@PathVariable Integer id) {
+        userService.delete(id);
+        return Result.success(null);
     }
 
     @GetMapping
-    public List<UserVO> list() {
+    public Result<List<UserVO>> list() {
         return Result.success(userService.list());
     }
 
     @GetMapping("/page")
-    public Result<?> page(@RequestParam int page,
-                          @RequestParam int size) {
+    public Result<Page<UserVO>> page(@RequestParam int page,
+                                     @RequestParam int size) {
         return Result.success(userService.page(page, size));
     }
 

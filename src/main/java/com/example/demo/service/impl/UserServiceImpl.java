@@ -6,8 +6,11 @@ import com.example.demo.mapper.UserMapper;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
 import com.example.demo.vo.UserVO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -62,7 +65,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Page<UserVO> page(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
+        Pageable pageable = PageRequest.of(page - 1, size, Sort.by(Sort.Order.desc("id")));
         Page<UserEntity> entityPage = userRepository.findAll(pageable);
 
         return entityPage.map(userMapper::toVO);
